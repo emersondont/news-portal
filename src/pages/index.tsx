@@ -25,7 +25,7 @@ export default function Home() {
       <h2 className={`font-bold text-4xl mt-14 ${roboto.className}`}>Latest News</h2>
       <div className="flex flex-wrap w-full justify-between mt-6">
         {latestNews.map((article, index) => (
-          index >= 1 && article.source.id && <NewsCard key={index} article={article} />
+          index >= 1 && <NewsCard key={index} article={article} />
         ))}
       </div>
     </>

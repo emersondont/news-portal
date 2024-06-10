@@ -1,7 +1,6 @@
 import Title from "@/components/title";
 import { Article } from "@/types";
 import { playfair_Display, roboto } from "@/utils/fonts";
-import { Playfair_Display, Roboto } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
