@@ -6,4 +6,8 @@ export type Article = {
   title: string,
   url: string,
   urlToImage: string,
+  source: {
+    id: string,
+    name: string
+  }
 }
