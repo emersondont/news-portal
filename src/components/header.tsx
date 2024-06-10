@@ -29,7 +29,10 @@ export default function Header() {
   }
 
   return (
-    <header className="flex py-8 px-32 bg-white100 w-full justify-between items-center fixed top-0 left-0 z-10">
+    <header className="flex py-8 px-9 bg-white100 w-full justify-between items-center fixed top-0 left-0 z-10
+      md:px-16
+      lg:px-32
+    ">
       <Link href='/' onClick={handleCloseInput}>
         <Logo />
       </Link>
@@ -38,7 +41,9 @@ export default function Header() {
           openInput && (
             <input
               type="text"
-              className={`outline-none text-black80 rounded ${roboto.className}`}
+              className={`outline-none text-black80 rounded ${roboto.className} w-32
+              sm:w-auto
+              `}
               placeholder="Pesquisar..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}

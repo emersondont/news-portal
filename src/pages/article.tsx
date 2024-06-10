@@ -17,14 +17,16 @@ export default function ArticlePage() {
       setArticle(JSON.parse(data as string))
     }
   }, [data]);
-  if(!article) return <></>;
+  if (!article) return <></>;
 
   return (
     <>
       <Title>{article.title}</Title>
 
-      <div className="flex gap-8 mb-16">
-        <div className="flex flex-col w-3/5">
+      <div className="flex gap-8 mb-16 md:flex-nowrap flex-wrap">
+        <div className="flex flex-col w-full
+        md:w-3/5
+        ">
           {article?.urlToImage &&
             <img
               src={article.urlToImage}
@@ -32,13 +34,17 @@ export default function ArticlePage() {
               alt="News Image"
             />
           }
-          <div className={`flex gap-4 text-black40 text-base font-normal mt-3 ${roboto.className}`}>
+          <div className={`flex gap-4 text-black40 text-sm font-normal mt-2 ${roboto.className}
+          sm:text-base sm:mt-4
+          `}>
             <span className="min-w-20">{new Date(article.publishedAt as string).toDateString()}</span>
             <span>{article.author}</span>
           </div>
         </div>
 
-        <p className={`text-xl text-black60 first-letter:text-4xl w-2/5 ${playfair_Display.className}`}>
+        <p className={`text-xl text-black60 first-letter:text-4xl w-full ${playfair_Display.className}
+        md:w-2/5
+        `}>
           {article.content ? article.content.split("[+")[0] : article.description}
           <Link href={article.url} target="_blank" className="text-black80 ml-2">
             Read more.

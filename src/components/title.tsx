@@ -5,6 +5,8 @@ interface Props {
 }
 export default function Title({children}: Props) {
   return (
-    <h1 className={`mt-32 font-bold text-5xl mb-6 ${roboto.className}`}>{children}</h1>
+    <h1 className={`mt-28 font-bold text-4xl mb-6 ${roboto.className}
+    md:mt-32 md:text-5xl
+    `}>{children}</h1>
   )
 }

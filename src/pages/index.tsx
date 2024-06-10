@@ -11,8 +11,12 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getData()
-      setLatestNews(data)
+      try {
+        const data = await getData()
+        setLatestNews(data)
+      } catch (error) {
+        console.error(error)
+      }
     }
     fetchData()
   }, [])
@@ -22,7 +26,9 @@ export default function Home() {
       <Title>Hot Topics</Title>
       {latestNews[0] && <HotTopics article={latestNews[0]} />}
 
-      <h2 className={`font-bold text-4xl mt-14 ${roboto.className}`}>Latest News</h2>
+      <h2 className={`font-bold text-2xl mt-14 ${roboto.className}
+      md:text-4xl
+      `}>Latest News</h2>
       <div className="flex flex-wrap w-full justify-between mt-6">
         {latestNews.map((article, index) => (
           index >= 1 && <NewsCard key={index} article={article} />
@@ -41,4 +47,5 @@ async function getData(): Promise<Article[]> {
   }
 
   return obj.data.articles
+
 }
