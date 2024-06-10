@@ -1,15 +1,7 @@
-import Link from "next/link";
-import { Roboto, Playfair_Display } from "next/font/google";
 import { Article } from "@/types";
 import { differenceBetweenDates } from "@/utils/dateUtils";
 import { useRouter } from "next/router";
-
-
-const playfair_Display = Playfair_Display({ subsets: ["latin"] });
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-});
+import { playfair_Display, roboto } from "@/utils/fonts";
 
 interface Props {
   article: Article

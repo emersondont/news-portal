@@ -1,14 +1,10 @@
+import Title from "@/components/title";
 import { Article } from "@/types";
+import { playfair_Display, roboto } from "@/utils/fonts";
 import { Playfair_Display, Roboto } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-const playfair_Display = Playfair_Display({ subsets: ["latin"] });
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-});
 
 export default function ArticlePage() {
   const [article, setArticle] = useState<Article | null>(null)
@@ -26,7 +22,7 @@ export default function ArticlePage() {
 
   return (
     <>
-      <h1 className={`mb-6 mt-32 font-bold text-5xl ${roboto.className}`}>{article.title}</h1>
+      <Title>{article.title}</Title>
 
       <div className="flex gap-8 mb-16">
         <div className="flex flex-col w-3/5">

@@ -1,13 +1,10 @@
-import { Roboto } from "next/font/google";
 import NewsCard from "@/components/newsCard";
 import { useEffect, useState } from "react";
 import { Article } from "@/types";
 import HotTopics from "@/components/hotTopics";
+import { roboto } from "@/utils/fonts";
+import Title from "@/components/title";
 
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-});
 
 export default function Home() {
   const [latestNews, setLatestNews] = useState<Article[]>([])
@@ -22,13 +19,13 @@ export default function Home() {
 
   return (
     <>
-      <h1 className={`mt-32 font-bold text-5xl mb-6 ${roboto.className}`}>Hot Topics</h1>
+      <Title>Hot Topics</Title>
       {latestNews[0] && <HotTopics article={latestNews[0]} />}
 
       <h2 className={`font-bold text-4xl mt-14 ${roboto.className}`}>Latest News</h2>
       <div className="flex flex-wrap w-full justify-between mt-6">
         {latestNews.map((article, index) => (
-          index >= 1 && <NewsCard key={index} article={article} />
+          index >= 1 && article.source.id && <NewsCard key={index} article={article} />
         ))}
       </div>
     </>
