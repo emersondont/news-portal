@@ -1,5 +1,3 @@
-import { ViewTransitions } from 'next-view-transitions'
-
 import Header from "./header";
 
 interface Props {
