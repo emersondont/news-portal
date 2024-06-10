@@ -13,7 +13,10 @@ const config: Config = {
         black60: '#444444',
         black40: '#6C6C6C',
         black20: '#949494',
-        white: '#fdfdfd'
+        white100: '#fdfdfd'
+      },
+      width: {
+        '270': '270px'
       }
     },
   },
