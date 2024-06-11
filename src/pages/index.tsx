@@ -5,17 +5,26 @@ import HotTopics from "@/components/hotTopics";
 import { roboto } from "@/utils/fonts";
 import Title from "@/components/title";
 
-interface Props {
-  articles: Article[]
-}
+export default function Home() {
+  const [latestNews, setLatestNews] = useState<Article[]>([])
 
-export default function Home({articles}: Props ) {
-  const [latestNews, setLatestNews] = useState<Article[]>(articles)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData()
+        setLatestNews(data)
+      } catch (error) {
+        setLatestNews([])
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <>
       <Title>Hot Topics</Title>
-      {latestNews[0] && <HotTopics article={latestNews[0]} />}
+      {latestNews.length > 0 && <HotTopics article={latestNews[0]} />}
 
       <h2 className={`font-bold text-2xl mt-14 ${roboto.className}
       md:text-4xl
@@ -29,12 +38,13 @@ export default function Home({articles}: Props ) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${process.env.HOST}/api/latestNews`)
-  const obj = await res.json()
+async function getData() {
+  const res = await fetch(`api/latestNews`)
 
-  return { 
-    props: { articles: obj.data.articles },
-    revalidate: 3600, // Regenerate the page every 1 hour
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
   }
+  
+  const obj = await res.json()
+  return obj.data.articles
 }

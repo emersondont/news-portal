@@ -5,7 +5,6 @@ import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-
 const roboto = Roboto({
   weight: ['400', '700'],
   subsets: ['latin'],
@@ -31,7 +30,7 @@ export default function Search() {
 
   return (
     <>
-      <Title>{JSON.parse(q as string)}</Title>
+      <Title>{q ? JSON.parse(q as string) : ''}</Title>
 
       <div className="flex flex-wrap w-full justify-between mt-6">
         {news?.map((article, index) => (
@@ -56,11 +55,11 @@ export default function Search() {
 
 async function getData(q: string): Promise<Article[]> {
   const res = await fetch(`api/searchNews?q=${q}`)
-  const obj = await res.json()
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-
+  
+  const obj = await res.json()
   return obj.data.articles
 }
