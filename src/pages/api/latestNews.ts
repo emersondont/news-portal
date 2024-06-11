@@ -11,9 +11,9 @@ export default async function handler(
 ) {
 
   try {
-    const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+    const response = await axios.get(`${process.env.API_HOST}/top-headlines`, {
       params: {
-        apiKey: '216692568f3e47faa19ce006494b59be',
+        apiKey: process.env.API_KEY,
         sortBy: 'publishedAt',
         country: 'us',
         pageSize: 21

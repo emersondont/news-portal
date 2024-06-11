@@ -11,10 +11,10 @@ export default async function handler(
 ) {
 
   try {
-    const response = await axios.get('https://newsapi.org/v2/everything', {
+    const response = await axios.get(`${process.env.API_HOST}/everything`, {
       params: {
         q: req.query.q,
-        apiKey: '216692568f3e47faa19ce006494b59be',
+        apiKey: process.env.API_KEY,
         sortBy: 'publishedAt',
         pageSize: 20
       }

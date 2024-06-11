@@ -5,21 +5,12 @@ import HotTopics from "@/components/hotTopics";
 import { roboto } from "@/utils/fonts";
 import Title from "@/components/title";
 
+interface Props {
+  articles: Article[]
+}
 
-export default function Home() {
-  const [latestNews, setLatestNews] = useState<Article[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getData()
-        setLatestNews(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchData()
-  }, [])
+export default function Home({articles}: Props ) {
+  const [latestNews, setLatestNews] = useState<Article[]>(articles)
 
   return (
     <>
@@ -38,14 +29,12 @@ export default function Home() {
   );
 }
 
-async function getData(): Promise<Article[]> {
-  const res = await fetch('api/latestNews')
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.HOST}/api/latestNews`)
   const obj = await res.json()
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+  return { 
+    props: { articles: obj.data.articles },
+    revalidate: 3600, // Regenerate the page every 1 hour
   }
-
-  return obj.data.articles
-
 }
